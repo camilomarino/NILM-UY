@@ -4,7 +4,6 @@ This repository contains a processed sample of the NILM-UY dataset and an implem
 
 # Code
 * Pre-processing algorithms for the UK-Dale dataset.
-<br>
 These algorithms are based on [Neural NILM (Jack Kelly)](docs/neural_nilm.pdf). These functions are useful for reading and pre-processing the `h5` file from UK-Dale.
 * Training and evaluation scripts for the models proposed in the paper.
 
