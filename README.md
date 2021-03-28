@@ -1,43 +1,42 @@
 # NILM-UY Dataset
+This repository contains a processed sample of the NILM-UY dataset and an implementation of the algorithms proposed in *NILM: Multivariate DNN performance analysis with high frequency features*. Instructions on how to get access to the full raw data is also included.
 
 
+# Code
+* Pre-processing algorithms for the UK-Dale dataset.
+<br>
+These algorithms are based on [Neural NILM (Jack Kelly)](docs/neural_nilm.pdf). These functions are useful for reading and pre-processing the `h5` file from UK-Dale.
+* Training and evaluation scripts for the models proposed in the paper.
 
 
-# Algoritmos
-Algoritmos de procesamiento y desagregacion de datos de la base UK-DALE.<br>
-Los algoritmos se basan en [Neuronal NILM (Jack Kelly)](docs/neural_nilm.pdf). <br>
-La explicacion de la implementacion especifica se puede ver en 
-[Proyecto de fin de carrera (Marchsesoni-MariÃ±o-Masquil)](docs/MMM20.pdf)
+## Data pre-processing
+The [pre-processing notebook](Generacion_X_y.ipynb) serves as an example on how to process the UK-Dale dataset for training the dissagregation models.
 
-Cuenta con varias funciones para la lectura y procesamiento de el arhivo .h5 suministrado en la base de datos UK-Dale.
-Ademas, tiene algoritmos para entrenar y evaluar redes neuronales profundas.
+## Algorithms
+The training and evaluation procedure is divided into three notebooks.
 
+1. [Training notebook](EntrenamientoRedesNeuronales.ipynb).
+This notebook contains the code for training a single model for one appliance. We also included an script for training all the architectures for all the considered appliances.
 
-## Procesamiento de datos
-En el [notebook de procesamiento de datos](Generacion_X_y.ipynb) se puede ver como se utilizan las funciones para obtener datos utiles para entrenar redes neuronales.
+2. [Metrics notebook](MetricasRedesNeuronales.ipynb). 
+This notebook allows you to load a previously trained model and calculates the metrics reported in the paper. AUC, Recall, Precision, Accuracy, False Positive Rate, F1-Score, Reite, MAE.
 
-## Algoritmos
-El proceso de entrenamiento y evaluación se divide en 3 notebooks.
+3. [Rolling windows evaluation](VentanasDeslizantes.ipynb). 
+This notebook can be used for evaluating the previously trained models with the rolling windows approach. Contains the code for loading the whole power time series and making predictions in a rolling window fashion.
 
-El primero es: [Notebook de entrenamiento de redes neuronales](EntrenamientoRedesNeuronales.ipynb). Este contiene codigo capaz de entrenar una arquitectura
-de re neuronal para un electrodomestico. Además se guardan los pesos generados por el entrenamiento y los valores de evolucion de la loss de entrenamiento
-Adicionamente se tiene un script capaz de  entrenar todos los modelos para todos los electrodomesticos.
+# Data
 
-El segundo es: [Notebook de metricas](MetricasRedesNeuronales.ipynb). Este carga el modelo entrenado en el primer notebook, predice los valores para cada conjunto de datos
-y reporta las metricas. Estas son: AUC, Recall, Precision, Accuracy, False Positive Rate, F1-Score, Reite, MAE
+* Pre-processed UK-Dale dataset ready for being used with the code base provided in this project. The dataset is already temporarily splitted: [data_ini.pickle](https://iie.fing.edu.uy/~cmarino/NILM/datos_ini.pickle) and
+[data_fin.pickle](https://iie.fing.edu.uy/~cmarino/NILM/datos_fin.pickle)
+* Pre-processed NILM-UY dataset. The uruguayan dataset already pre-processed with a sampling period of 6 seconds. This data is also ready for being used with the code provided in this project. [datos_uruguay.pickle](https://iie.fing.edu.uy/~cmarino/NILM/datos_uruguay.pickle)
+* Trained weights of the models [pesos.zip](https://iie.fing.edu.uy/~cmarino/NILM/pesos.zip)
 
-El tercero es: [Notebook de evaluacion por metodo de ventanas deslizantes](VentanasDeslizantes.ipynb). Este carga el modelo entrenado en el primer notebook,
-y la serie temporal completa. Va prediciendo la salida por ventanas (una ventana que se mueve). Reporta las metricas para la serie completa.
+Alternative Google Drive link:<br>
+[Data](https://drive.google.com/drive/folders/1AOkR5vRICbf8NUeMc40w3UYwXxuqjnr-?usp=sharing) 
 
-## Datos disponibles
-[ukdale.h5](https://data.ukedc.rl.ac.uk/browse/edc/efficiency/residential/EnergyConsumption/Domestic/UK-DALE-2017/UK-DALE-FULL-disaggregated/ukdale.h5.zip)
-<br>[data_ini.pickle](https://iie.fing.edu.uy/~cmarino/NILM/datos_ini.pickle)
-<br>[data_fin.pickle](https://iie.fing.edu.uy/~cmarino/NILM/datos_fin.pickle)
-<br>[datos_uruguay.pickle](https://iie.fing.edu.uy/~cmarino/NILM/datos_uruguay.pickle)
-<br>[vectores.zip](https://iie.fing.edu.uy/~cmarino/NILM/vectores.zip)
-<br>[pesos.zip](https://iie.fing.edu.uy/~cmarino/NILM/pesos.zip)
+## How to get full acess to the NILM-UY dataset
+The raw NILM-UY dataset collected in Uruguay contains aggregated and disaggregated data:
+*  High sampling frequency aggregated data from two homes. (140 gb)
+*  Individual power measurements per appliance. With a sampling period of 1 minute. (37 mb)
 
-Link alternativo a Google Drive:<br>
-[Datos](https://drive.google.com/drive/folders/1AOkR5vRICbf8NUeMc40w3UYwXxuqjnr-?usp=sharing) 
-
-Nota: Los datos fueron creados con seed=5.
+If you are interested in accessing this data for research purposes send us an email at `cmarino@fing.edu.uy` or `emasquil@fing.edu.uy` and we can provide you with download links.
